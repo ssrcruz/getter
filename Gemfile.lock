@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/rails/webpacker.git
-  revision: a107b70f579e0cf34988e8b3627ba8d66ffb7f62
+  revision: 17f70fe3002e1c1a8676f510e227211512909784
   specs:
     webpacker (1.1)
       activesupport (>= 4.2)
@@ -60,7 +60,12 @@ GEM
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
     arel (8.0.0)
+    autoprefixer-rails (6.7.7.1)
+      execjs
     bindex (0.5.0)
+    bootstrap (4.0.0.alpha6)
+      autoprefixer-rails (>= 6.0.3)
+      sass (>= 3.4.19)
     builder (3.2.3)
     byebug (9.0.6)
     capybara (2.13.0)
@@ -184,6 +189,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap (~> 4.0.0alpha6)
   byebug
   capybara (~> 2.13.0)
   coffee-rails (~> 4.2)
