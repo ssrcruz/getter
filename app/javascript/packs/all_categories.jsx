@@ -14,7 +14,9 @@ export var AllCategories = React.createClass({
 
   // To render the data
   render() {
-    var categories = this.state.categories.map((category) => {
+    // send variables dowm the hierarchy with props
+    // props immutable to reach them user this.props
+    var categories = this.props.categories.map((category) => {
       return (
         <div key={category.id}>
           <h3>{category.title}</h3>
