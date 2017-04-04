@@ -12,21 +12,39 @@ export var AllCategories = React.createClass({
     $.getJSON('/api/v1/categories.json', (response) => { this.setState({ categories: response }) });
   },
 
+  // will pass handleDelete() from the body
+  handleDelete(id) {
+    this.props.handleDelete(id);
+  },
+
   // To render the data
   render() {
     // send variables dowm the hierarchy with props
     // props immutable to reach them user this.props
     var categories = this.props.categories.map((category) => {
       return (
-        <div key={category.id}>
-          <h3>{category.title}</h3>
-          <p>{category.description}</p>
-        </div>
+            <tr key={category.id}>
+              <th scope="row">{category.id}</th>
+              <td>{category.title}</td>
+              <td>{category.description}</td>
+              <td><button className='btn btn-primary' onClick={this.handleDelete.bind(this, category.id)}>Delete</button></td>
+            </tr>
       )
     });
     return (
-      <div>
-        {categories}
+      <div className="container">
+        <table className="table table-bordered">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Title</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categories}
+          </tbody>
+        </table>
       </div>
     )
   }

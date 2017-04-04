@@ -13,7 +13,7 @@ export var NewCategory = React.createClass ({
       type: 'POST',
       data: { category: { title: title, description: description } },
       success: (category) => {
-        // calls handleSubmit on success 
+        // calls handleSubmit on success
         this.props.handleSubmit(category);
       }
     });
@@ -21,10 +21,18 @@ export var NewCategory = React.createClass ({
   render() {
     return (
       // on submit call handleClick
-      <div>
-        <input ref='title' placeholder='Enter Title' />
-        <input ref='description' placeholder='Enter Description' />
-          <button onClick={this.handleClick}>Submit</button>
+      <div className="container">
+        <form>
+          <div className="form-group">
+            <label htmlFor="formGroupExampleInput">Title:</label>
+            <input ref='title' type='text' className='form-control' placeholder='Enter Title' />
+          </div>
+          <div className="form-group">
+            <label htmlFor="formGroupExampleInput2">Description:</label>
+            <input ref='description' type='text' className='form-control' placeholder='Enter Description' />
+          </div>
+          <button onClick={this.handleClick} className='btn btn-primary'>Submit</button>
+        </form>
       </div>
     )
   }
