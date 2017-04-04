@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { AllCategories } from './all_categories'
 import { NewCategory } from './new_category'
 
@@ -31,7 +30,27 @@ export var Body = React.createClass({
       }
     });
   },
+  // handles the update to the server
+  handleUpdate(category) {
+    $.ajax({
+      url: `/api/v1/categories/${category.id}`,
+      type: 'PUT',
+      data: { category: category },
+      success: (category) => {
+        this.updateCategories(category);
+      }
+    })
+  },
 
+  // replace new update with the old one
+  updateCategories(category) {
+    var categories = this.state.categories.filter((i) => { return i.id != category.id });
+    categories.push(category);
+
+    this.setState({categories: categories});
+  },
+
+  // removes data from virtual memory
   removeCategoryClient(id) {
     var newCategories = this.state.categories.filter((category) => {
       return category.id != id;
@@ -44,7 +63,7 @@ export var Body = React.createClass({
     return (
       <div>
         <NewCategory handleSubmit={this.handleSubmit} />
-        <AllCategories categories={this.state.categories} handleDelete={this.handleDelete} />
+        <AllCategories categories={this.state.categories} handleDelete={this.handleDelete} handleUpdate={this.handleUpdate} />
       </div>
     )
   }

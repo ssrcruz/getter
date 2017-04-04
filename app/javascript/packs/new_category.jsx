@@ -1,6 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-// import { Body } from './body'
 
 export var NewCategory = React.createClass ({
   handleClick() {

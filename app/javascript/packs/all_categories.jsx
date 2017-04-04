@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { Category } from './category'
 
 export var AllCategories = React.createClass({
   // How data is stored, the data must be initialized
@@ -17,18 +17,21 @@ export var AllCategories = React.createClass({
     this.props.handleDelete(id);
   },
 
+  onUpdate(category) {
+    this.props.handleUpdate(category);
+  },
+
   // To render the data
   render() {
     // send variables dowm the hierarchy with props
     // props immutable to reach them user this.props
     var categories = this.props.categories.map((category) => {
       return (
-            <tr key={category.id}>
-              <th scope="row">{category.id}</th>
-              <td>{category.title}</td>
-              <td>{category.description}</td>
-              <td><button className='btn btn-primary' onClick={this.handleDelete.bind(this, category.id)}>Delete</button></td>
-            </tr>
+        <Category key={category.id}
+                  category={category}
+                  handleDelete={this.handleDelete.bind(this, category.id)}
+                  handleUpdate={this.onUpdate} />
+
       )
     });
     return (
