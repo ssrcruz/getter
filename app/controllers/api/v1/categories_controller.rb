@@ -17,6 +17,11 @@ class Api::V1::CategoriesController < Api::V1::BaseController
     respond_with category, json: category
   end
 
+  def show
+    category = Category.find(params["id"])
+    repond_with category, json: category
+  end
+
   private
 
   def category_params

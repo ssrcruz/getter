@@ -1,5 +1,6 @@
 import React from 'react'
 import { Category } from './category'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 export var AllCategories = React.createClass({
   // How data is stored, the data must be initialized

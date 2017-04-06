@@ -1,4 +1,6 @@
 import React from 'react'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Topics } from './topics'
 
 export var Category = React.createClass({
 
@@ -18,20 +20,28 @@ export var Category = React.createClass({
   },
 
   render() {
-    var title = this.state.editable ? <td><input type='text' ref='title' defaultValue={this.props.category.title} /></td> : <td>{this.props.category.title}</td>
+    var title = this.state.editable ? <input type='text' ref='title' defaultValue={this.props.category.title} /> : <div>{this.props.category.title}</div>
     var description = this.state.editable ? <td><input type='text' ref='description' defaultValue={this.props.category.description} /></td> : <td>{this.props.category.description}</td>
+
     return (
-      <tr>
-        <th scope="row">{this.props.category.id}</th>
-        {title}
-        {description}
-        <td>
-          <button className='btn btn-primary' onClick={this.props.handleDelete}>Delete</button>
-        </td>
-        <td>
-          <button className='btn btn-primary' onClick={this.handleEdit}>{ this.state.editable ? 'Submit' : 'Edit' }</button>
-        </td>
-      </tr>
+      <Router>
+        <tr>
+          <th scope="row">{this.props.category.id}</th>
+          <td>
+            <Link to={`/categories/${this.props.category.id}`}>
+              {title}
+              <Route path={`/categories/${this.props.category.id}`} component={Topics} />
+            </Link>
+          </td>
+            {description}
+          <td>
+            <button className='btn btn-primary' onClick={this.props.handleDelete}>Delete</button>
+          </td>
+          <td>
+            <button className='btn btn-primary' onClick={this.handleEdit}>{ this.state.editable ? 'Submit' : 'Edit' }</button>
+          </td>
+        </tr>
+      </Router>
     )
   }
 });

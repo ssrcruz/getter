@@ -29,7 +29,7 @@ export var NewCategory = React.createClass ({
             <label htmlFor="formGroupExampleInput2">Description:</label>
             <input ref='description' type='text' className='form-control' placeholder='Enter Description' />
           </div>
-          <button onClick={this.handleClick} className='btn btn-primary'>Submit</button>
+          <button onClick={this.handleClick} type='button' className='btn btn-primary'>Submit</button>
         </form>
       </div>
     )
