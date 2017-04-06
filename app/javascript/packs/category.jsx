@@ -1,6 +1,5 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { Topics } from './topics'
 
 export var Category = React.createClass({
 
@@ -30,7 +29,7 @@ export var Category = React.createClass({
           <td>
             <Link to={`/categories/${this.props.category.id}`}>
               {title}
-              <Route path={`/categories/${this.props.category.id}`} component={Topics} />
+              <Route path={`/categories/${this.props.category.id}`} />
             </Link>
           </td>
             {description}
