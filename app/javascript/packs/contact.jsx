@@ -1,6 +1,8 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
+import { Header } from './header'
 
-var Contact = React.createClass ({
+export class Contact extends React.Component {
   render() {
     return(
       <div>
@@ -8,4 +10,12 @@ var Contact = React.createClass ({
       </div>
     )
   }
-});
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  ReactDOM.render(
+    <Header />,
+    <Contact />,
+    document.body.appendChild(document.createElement('div')),
+  )
+})

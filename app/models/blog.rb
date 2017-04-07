@@ -1,5 +1,4 @@
-class Category < ApplicationRecord
-  has_many :topics, dependent: :destroy
+class Blog < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
 end

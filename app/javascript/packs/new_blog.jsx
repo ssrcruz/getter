@@ -1,18 +1,18 @@
 import React from 'react'
 
-export var NewCategory = React.createClass ({
+export var NewBlog = React.createClass ({
   handleClick() {
     // how to get the value of the input fields
     var title = this.refs.title.value;
     var description = this.refs.description.value;
     // send values into the server
     $.ajax({
-      url: '/api/v1/categories',
+      url: '/api/v1/blogs',
       type: 'POST',
-      data: { category: { title: title, description: description } },
-      success: (category) => {
+      data: { blog: { title: title, description: description } },
+      success: (blog) => {
         // calls handleSubmit on success
-        this.props.handleSubmit(category);
+        this.props.handleSubmit(blog);
       }
     });
   },
