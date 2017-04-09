@@ -29,7 +29,7 @@ export class Header extends React.Component {
                     <Link to="/" className="nav-link">Home</Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="/blogs" className="nav-link">Blogs</Link>
+                    <Link to="/blogs" onClick={this.props.handleClick} className="nav-link">Blogs</Link>
                   </li>
                   <li className="nav-item">
                     <Link to="/about" className="nav-link">About</Link>

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Header } from './header'
-import { Body } from './body'
+import { Blogs } from './all_blogs'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 export class Main extends React.Component {
