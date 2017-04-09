@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom'
 import { Blog } from './blog'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { NewBlog } from './new_blog'
-// import { Main } from './main'
-// import { Header } from './header'
 
 export class Blogs extends React.Component {
   // How data is stored, the data must be initialized with a constructor

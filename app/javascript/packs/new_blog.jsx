@@ -1,6 +1,6 @@
 import React from 'react'
 
-export var NewBlog = React.createClass ({
+export class NewBlog extends React.Component {
   handleClick() {
     // how to get the value of the input fields
     var title = this.refs.title.value;
@@ -15,7 +15,8 @@ export var NewBlog = React.createClass ({
         this.props.handleSubmit(blog);
       }
     });
-  },
+  }
+  
   render() {
     return (
       // on submit call handleClick
@@ -34,4 +35,4 @@ export var NewBlog = React.createClass ({
       </div>
     )
   }
-});
+}
