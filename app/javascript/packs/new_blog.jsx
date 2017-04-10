@@ -1,4 +1,5 @@
 import React from 'react'
+import { TextEditor } from './text_editor'
 
 export class NewBlog extends React.Component {
   handleClick() {
@@ -28,7 +29,8 @@ export class NewBlog extends React.Component {
           </div>
           <div className="form-group">
             <label htmlFor="formGroupExampleInput2">Description:</label>
-            <input ref='description' type='text' className='form-control' placeholder='Enter Description' />
+            <TextEditor />
+            <textarea ref='description' type='text' className='form-control' placeholder='Enter Description'></textarea>
           </div>
           <button onClick={this.handleClick} type='button' className='btn btn-primary'>Submit</button>
         </form>

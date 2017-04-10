@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/about', to: 'site#about', as: 'about'
   get '/blogs', to: 'site#blogs', as: 'blogs'
   get '/contact', to: 'site#contact', as: 'contact'
-  get '/blogs/:id', to: 'site#show', as: 'blog'
+  get '/blogs/:id', to: 'site#blog', as: 'blog'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
