@@ -17,5 +17,5 @@ module.exports = {
   env,
   paths,
   loadersDir,
-  publicPath
+  publicPath,
 }
