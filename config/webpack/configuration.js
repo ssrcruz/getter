@@ -18,4 +18,14 @@ module.exports = {
   paths,
   loadersDir,
   publicPath,
+  module: {
+    loaders: [
+      {
+        test: /plugin\.css$/,
+        loaders: [
+          'style', 'css',
+        ]
+      }
+    ]
+  }
 }
