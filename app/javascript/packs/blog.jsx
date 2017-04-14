@@ -1,9 +1,11 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw, ContentState} from 'draft-js'
+import {stateToHTML} from 'draft-js-export-html';
 
 export class Blog extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {editable: false};
     this.handleEdit = this.handleEdit.bind(this);
   }
@@ -21,26 +23,22 @@ export class Blog extends React.Component {
 
   render() {
     var title = this.state.editable ? <input type='text' ref='title' defaultValue={this.props.blog.title} /> : <div>{this.props.blog.title}</div>
-    var description = this.state.editable ? <td><input type='text' ref='description' defaultValue={this.props.blog.description} /></td> : <td>{this.props.blog.description}</td>
+    var description = this.state.editable ? <td><input type='text' ref='description' defaultValue={this.props.blog.description} /></td> : <td></td>
 
     return (
       <Router>
-        <tr>
-          <th scope="row">{this.props.blog.id}</th>
-          <td>
-            <Link to={`/blogs/${this.props.blog.id}`}>
-              {title}
-              <Route path={`/blogs/${this.props.blog.id}`} />
-            </Link>
-          </td>
-            {description}
-          <td>
-            <button className='btn btn-primary' onClick={this.props.handleDelete}>Delete</button>
-          </td>
-          <td>
-            <button className='btn btn-primary' onClick={this.handleEdit}>{ this.state.editable ? 'Submit' : 'Edit' }</button>
-          </td>
-        </tr>
+        <div>
+          {this.props.blog.id}
+          <Link to={`/blogs/${this.props.blog.id}`}>
+            {title}
+            <Route path={`/blogs/${this.props.blog.id}`} />
+          </Link>
+          <Editor
+            editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.blog.description)))}
+          />
+          <button className='btn btn-primary' onClick={this.props.handleDelete}>Delete</button>
+          <button className='btn btn-primary' onClick={this.handleEdit}>{ this.state.editable ? 'Submit' : 'Edit' }</button>
+        </div>
       </Router>
     )
   }

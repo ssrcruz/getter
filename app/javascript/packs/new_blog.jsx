@@ -1,13 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Editor, EditorState, RichUtils, convertToRaw} from 'draft-js'
+import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw, ContentState, convertFromHTML} from 'draft-js'
+import {stateToHTML} from 'draft-js-export-html';
 
 export class NewBlog extends React.Component {
-
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {editorState: EditorState.createEmpty()};
-
     this.focus = () => this.refs.description.focus();
     this.onChange = (editorState) => this.setState({editorState});
 
@@ -48,13 +47,21 @@ export class NewBlog extends React.Component {
     // how to get the value of the input fields
     var title = this.refs.title.value;
     var description = this.refs.description.value;
+
+    const contentState = this.state.editorState.getCurrentContent();
+    const rawDraftContentState = convertToRaw(contentState);
     // send values into the server
     $.ajax({
       url: '/api/v1/blogs',
       type: 'POST',
-      data: { blog: { title: title, description: description } },
+      data: { blog: { title: title, description: JSON.stringify(rawDraftContentState) } },
+      dataType: 'json',
+      // contentType: 'application/json',
       success: (blog) => {
         // calls handleSubmit on success
+        console.log(blog);
+        console.log(rawDraftContentState);
+        alert(EditorState.createWithContent(convertFromRaw(rawDraftContentState)));
         this.props.handleSubmit(blog);
       }
     });
@@ -62,7 +69,6 @@ export class NewBlog extends React.Component {
 
   render() {
     const {editorState} = this.state;
-
     let className = 'RichEditor-editor';
     var contentState = editorState.getCurrentContent();
     if (!contentState.hasText()) {
@@ -73,7 +79,7 @@ export class NewBlog extends React.Component {
 
     return (
       <div>
-        <div>{JSON.stringify(convertToRaw(editorState.getCurrentContent()))}</div>
+        <div></div>
           <div className="container">
             <form>
               <div className="form-group">
@@ -96,15 +102,11 @@ export class NewBlog extends React.Component {
                   handleKeyCommand={this.handleKeyCommand}
                   onChange={this.onChange}
                   placeholder="Tell a story ..."
-                  ref='description'
-                  type='text'
+                  ref="description"
                   spellCheck={true}
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="formGroupExampleInput2">Description:</label>
-              </div>
-              <button onClick={this.handleClick} type='button' className='btn btn-primary'>Publish Article</button>
+              <button onClick={this.handleClick.bind(this)} type='button' className='btn btn-primary'>Publish Article</button>
             </form>
           </div>
       </div>
