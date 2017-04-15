@@ -8,7 +8,6 @@ export class Blogs extends React.Component {
   // How data is stored, the data must be initialized with a constructor
   constructor(props) {
     super(props);
-    // const DBEditorState = convertFromRaw(JSON.parse(this.))
     this.state = { blogs: [] };
     // binds methods so they can access state
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -75,7 +74,6 @@ export class Blogs extends React.Component {
     var blogs = this.state.blogs.map((blog) => {
       return (
         <Blog key={blog.id}
-              data={blog}
               blog={blog}
               handleDelete={this.handleDelete.bind(this, blog.id)}
               handleUpdate={this.onUpdate} />

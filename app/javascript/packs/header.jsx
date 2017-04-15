@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import { Blogs } from './all_blogs'
 import { Contact } from './contact'
+import { NewBlog } from './new_blog'
 
 export class Header extends React.Component {
   render() {
@@ -33,6 +34,9 @@ export class Header extends React.Component {
                   <li className="nav-item">
                     <Link to="/contact" className="nav-link">Contact</Link>
                   </li>
+                  <li className="nav-item">
+                    <Link to="/newblog" className="nav-link">Create New Blog</Link>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -41,6 +45,7 @@ export class Header extends React.Component {
           <Route path="/about" component={About}/>
           <Route path="/blogs" component={Blogs}/>
           <Route path="/contact" component={Contact}/>
+          <Route path="/newblog" component={NewBlog}/>
         </div>
       </Router>
     )

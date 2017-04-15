@@ -1,18 +1,35 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw, ContentState, convertFromHTML} from 'draft-js'
-import {stateToHTML} from 'draft-js-export-html';
+import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw} from 'draft-js'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 
 export class NewBlog extends React.Component {
-  constructor() {
-    super();
-    this.state = {editorState: EditorState.createEmpty()};
+  constructor(props) {
+    super(props);
+    this.state = {editorState: EditorState.createEmpty(), blogs: []};
     this.focus = () => this.refs.description.focus();
     this.onChange = (editorState) => this.setState({editorState});
 
     this.handleKeyCommand = (command) => this._handleKeyCommand(command);
     this.toggleBlockType = (type) => this._toggleBlockType(type);
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style);
+
+    this.handleSubmit = (blog) => this._handleSubmit(blog);
+  }
+  // How to get the data from the server
+  componentDidMount() {
+    $.getJSON('/api/v1/blogs.json', (response) => { this.setState({ blogs: response }) })
+  }
+
+  // pass a function as a property down the hierarchy
+  _handleSubmit(blog) {
+    // add new blog to the blog array
+    var newState = this.state.blogs.concat(blog);
+    this.setState({ blogs: newState });
   }
 
   _handleKeyCommand(command) {
@@ -56,13 +73,9 @@ export class NewBlog extends React.Component {
       type: 'POST',
       data: { blog: { title: title, description: JSON.stringify(rawDraftContentState) } },
       dataType: 'json',
-      // contentType: 'application/json',
       success: (blog) => {
         // calls handleSubmit on success
-        console.log(blog);
-        console.log(rawDraftContentState);
-        alert(EditorState.createWithContent(convertFromRaw(rawDraftContentState)));
-        this.props.handleSubmit(blog);
+        this.handleSubmit(blog);
       }
     });
   }
@@ -78,38 +91,38 @@ export class NewBlog extends React.Component {
     }
 
     return (
-      <div>
-        <div></div>
-          <div className="container">
-            <form>
-              <div className="form-group">
-                <label htmlFor="formGroupExampleInput">Title:</label>
-                <input ref='title' type='text' className='form-control' placeholder='Enter Title' />
-              </div>
-              <BlockStyleControls
+      <Router>
+        <div className="container">
+          <Editor editorState={EditorState.createWithContent(this.state.editorState.getCurrentContent())} />
+          <form>
+            <div className="form-group">
+              <label htmlFor="formGroupExampleInput">Title:</label>
+              <input ref='title' type='text' className='form-control' placeholder='Enter Title' />
+            </div>
+            <BlockStyleControls
+              editorState={editorState}
+              onToggle={this.toggleBlockType}
+            />
+            <InlineStyleControls
+              editorState={editorState}
+              onToggle={this.toggleBlockType}
+            />
+            <div className={className} onClick={this.focus}>
+              <Editor
+                blockStyleFn={getBlockStyle}
+                customStyleMap={styleMap}
                 editorState={editorState}
-                onToggle={this.toggleBlockType}
+                handleKeyCommand={this.handleKeyCommand}
+                onChange={this.onChange}
+                placeholder="Tell a story ..."
+                ref="description"
+                spellCheck={true}
               />
-              <InlineStyleControls
-                editorState={editorState}
-                onToggle={this.toggleBlockType}
-              />
-              <div className={className} onClick={this.focus}>
-                <Editor
-                  blockStyleFn={getBlockStyle}
-                  customStyleMap={styleMap}
-                  editorState={editorState}
-                  handleKeyCommand={this.handleKeyCommand}
-                  onChange={this.onChange}
-                  placeholder="Tell a story ..."
-                  ref="description"
-                  spellCheck={true}
-                />
-              </div>
-              <button onClick={this.handleClick.bind(this)} type='button' className='btn btn-primary'>Publish Article</button>
-            </form>
-          </div>
-      </div>
+            </div>
+            <button onClick={this.handleClick.bind(this)} type='button' className='btn btn-primary'>Publish Article</button>
+          </form>
+        </div>
+      </Router>
     )
   }
 }
