@@ -1,7 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw, ContentState} from 'draft-js'
-import { MainBlog } from './main_blog'
 
 
 export class Blog extends React.Component {

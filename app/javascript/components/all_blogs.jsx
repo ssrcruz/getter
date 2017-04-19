@@ -15,9 +15,9 @@ export class Blogs extends React.Component {
   }
 
   // How to get the data from the server
-  // componentDidMount() {
-  //   $.getJSON('/api/v1/blogs.json', (response) => { this.setState({ blogs: response }) })
-  // }
+  componentDidMount() {
+    $.getJSON('/api/v1/blogs.json', (response) => { this.setState({ blogs: response }) })
+  }
 
   // Delete data from the server
   handleDelete(id) {
