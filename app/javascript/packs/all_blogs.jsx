@@ -10,21 +10,14 @@ export class Blogs extends React.Component {
     super(props);
     this.state = { blogs: [] };
     // binds methods so they can access state
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
   }
 
   // How to get the data from the server
-  componentDidMount() {
-    $.getJSON('/api/v1/blogs.json', (response) => { this.setState({ blogs: response }) })
-  }
-
-  // pass a function as a property down the hierarchy
-  handleSubmit(blog) {
-    // add new blog to the blog array
-    var newState = this.state.blogs.concat(blog);
-    this.setState({ blogs: newState });
-  }
+  // componentDidMount() {
+  //   $.getJSON('/api/v1/blogs.json', (response) => { this.setState({ blogs: response }) })
+  // }
 
   // Delete data from the server
   handleDelete(id) {
@@ -82,7 +75,6 @@ export class Blogs extends React.Component {
 
     return (
       <div className="container">
-        <NewBlog handleSubmit={this.handleSubmit} />
         <h2>Blogs</h2>
         {blogs}
       </div>
