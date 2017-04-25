@@ -1,22 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Header } from '../components/header'
-import { Blogs } from '../components/all_blogs'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+// import { Header } from '../components/header'
+import { BlogList } from '../components/BlogList'
+// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import store from '../store'
+import { Provider } from "react-redux"
+import AppComponent from '../components/App.js'
 
-export class Main extends React.Component {
-  render() {
-    return (
-      <div>
-        <Header />
-      </div>
-    )
-  }
-}
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Main />,
-    document.body.appendChild(document.createElement('div')),
+    <Provider store={store}>
+      <AppComponent />
+    </Provider>,
+    document.getElementById('root')
   )
 })
+
+// store.dispatch({type: 'FETCH_BLOGS'})

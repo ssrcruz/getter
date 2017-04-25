@@ -5,37 +5,36 @@ import {
   Route,
   Link
 } from 'react-router-dom'
-import { Blogs } from './all_blogs'
+import { BlogList } from './BlogList'
 import { Contact } from './contact'
 import { NewBlog } from './new_blog'
+import { App } from './App'
+
 
 export class Header extends React.Component {
   render() {
     return (
       <Router>
         <div>
-          <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
-            <div className="container">
-              <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-              </button>
-              <Link to='/'className="navbar-brand">RubenOnRails</Link>
-              <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul className="navbar-nav">
-                  <li className="nav-item">
-                    <Link to="/" className="nav-link">Home</Link>
+          <nav>
+            <div>
+              <Link to='/'>RubenOnRails</Link>
+              <div>
+                <ul>
+                  <li>
+                    <Link to="/">Home</Link>
                   </li>
-                  <li className="nav-item">
-                    <Link to="/blogs" onClick={this.props.handleClick} className="nav-link">Blogs</Link>
+                  <li>
+                    <Link to="/blogs">Blogs</Link>
                   </li>
-                  <li className="nav-item">
-                    <Link to="/about" className="nav-link">About</Link>
+                  <li>
+                    <Link to="/about">About</Link>
                   </li>
-                  <li className="nav-item">
-                    <Link to="/contact" className="nav-link">Contact</Link>
+                  <li>
+                    <Link to="/contact">Contact</Link>
                   </li>
-                  <li className="nav-item">
-                    <Link to="/newblog" className="nav-link">Create New Blog</Link>
+                  <li>
+                    <Link to="/newblog">Create New Blog</Link>
                   </li>
                 </ul>
               </div>
@@ -43,7 +42,7 @@ export class Header extends React.Component {
           </nav>
           <Route exact path="/" component={Home}/>
           <Route path="/about" component={About}/>
-          <Route path="/blogs" component={Blogs}/>
+          <Route path="/blogs" component={App}/>
           <Route path="/contact" component={Contact}/>
           <Route path="/newblog" component={NewBlog}/>
         </div>
