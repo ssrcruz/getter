@@ -1,8 +1,8 @@
 // middleware
 import axios from 'axios';
 
-export function fetchBlogs() {
-  return function(dispatch) {
+export const fetchBlogs = () => {
+  return (dispatch) => {
     axios.get("/api/v1/blogs.json")
       .then((response) => {
         dispatch({type: "FETCH_BLOGS_FULFILLED", payload: response.data});
@@ -13,18 +13,31 @@ export function fetchBlogs() {
   }
 }
 
-export function addBlog(id) {
+export const addBlog = (id, title) => {
   return {
     type: 'ADD_BLOG',
     payload: {
       id,
-      title,
-      description,
+      title
     },
   }
 }
 
-export function updateBlog(id) {
+export const setVisibilityFilter = (filter) => {
+  return {
+    type: 'SET_VISIBILITY_FILTER',
+    filter
+  }
+}
+
+export const toggleBlog = (id) => {
+  return {
+    type: 'TOGGLE_BLOG',
+    id
+  }
+}
+
+export const updateBlog = (id) => {
   return {
     type: 'UPDATE_BLOG',
     payload: {
@@ -35,7 +48,7 @@ export function updateBlog(id) {
   }
 }
 
-export function deleteBlog(id) {
+export const deleteBlog = (id) => {
   return {
     type: 'DELETE_BLOG',
     payload: id }

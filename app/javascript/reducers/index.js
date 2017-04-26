@@ -1,7 +1,10 @@
 import { combineReducers } from "redux";
-
 import blogs from "./blogsReducer";
+import visibilityFilter from './visibilityFilter'
 
-export default combineReducers({
-  blogs
-});
+const blogApp = combineReducers({
+  blogs,
+  visibilityFilter
+})
+
+export default blogApp

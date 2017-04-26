@@ -1,17 +1,20 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+// import { connect } from 'react-redux'
 // import Blog from './Blog';
-import BlogList from './BlogList';
-import { fetchBlogs } from '../actions/blogActions';
-import { bindActionCreators } from 'redux'
+import Header from './Header'
+// import BlogList from './BlogList'
+import AddBlog from '../containers/AddBlog'
+import VisibleBlogList from '../containers/VisibleBlogList'
+// import { fetchBlogs } from '../actions/blogActions'
+// import { bindActionCreators } from 'redux'
 
-function mapStateToProps(state) {
-  return { blogs: state.blogs }
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({"FETCH_BLOGS":fetchBlogs}, dispatch)
-}
+// function mapStateToProps(state) {
+//   return { blogs: state.blogs }
+// }
+//
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({"FETCH_BLOGS":fetchBlogs}, dispatch)
+// }
 
 // Blogs.propTypes = {
 //   fetchBlogs: PropTypes.func.isRequired
@@ -19,12 +22,20 @@ function mapDispatchToProps(dispatch) {
 // }
 // export default connect(mapStateToProps, mapDispatchToProp)(BlogList)
 
-connect(mapStateToProps, mapDispatchToProps)(BlogList)
+// connect(mapStateToProps, mapDispatchToProps)(BlogList)
 
-export default class App extends React.Component {
-  componentWillMount() {
-    this.props.dispatch(fetchBlogs());
-  }
+const App = () => (
+  <div>
+    <AddBlog />
+    <VisibleBlogList />
+    <Header />
+  </div>
+)
+
+export default App
+  // componentWillMount() {
+  //   this.props.dispatch(fetchBlogs());
+  // }
 
   // fetchBlogs() {
   //   this.props.dispatch(fetchBlogs())
@@ -85,7 +96,7 @@ export default class App extends React.Component {
   //   this.handleUpdate(blog);
   // }
 
-  render() {
+  // render() {
     // send variables dowm the hierarchy with props
     // props immutable to reach them user this.props
     // const { blogs } = this.props.blogs;
@@ -106,12 +117,12 @@ export default class App extends React.Component {
     //   )
     // })
 
-    return (
-      <div>
-        Header
-        <BlogList blogs={this.props.blogs} />
-      </div>
-    )
-
-  }
-}
+//     return (
+//       <div>
+//         Header
+//         <BlogList blogs={this.props.blogs} />
+//       </div>
+//     )
+//
+//   }
+// }
