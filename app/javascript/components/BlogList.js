@@ -1,27 +1,22 @@
-import React from 'react'
-import { PropTypes } from 'prop-types'
-import Blog from './Blog'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+// import Blog from './Blog'
 
 
-const BlogList = ({ blogs, onBlogClick }) => (
-  <ul>
-    {blogs.map(blog =>
-      <Blog
-        key={blog.id}
-        {...blog}
-        onClick={() => onBlogClick(blog.id)}
-      />
-    )}
-  </ul>
-)
+class BlogList extends Component {
+  render() {
+    return (
+      <ul>
+        {this.props.blogs.map((post, i) =>
+          <li key={i}>{blog.title}{blog.description}</li>
+        )}
+      </ul>
+    )
+  }
+}
 
 BlogList.propTypes = {
-  blogs: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    completed: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired
-  }).isRequired).isRequired,
-  onBlogClick: PropTypes.func.isRequired
+  blogs: PropTypes.array.isRequired
 }
 
 export default BlogList

@@ -26,9 +26,9 @@ import VisibleBlogList from '../containers/VisibleBlogList'
 
 const App = () => (
   <div>
+    <Header />
     <AddBlog />
     <VisibleBlogList />
-    <Header />
   </div>
 )
 
