@@ -1,26 +1,73 @@
-import {
-  REQUEST_BLOGS, RECEIVE_BLOGS
-} from '../actions/blogActions'
+import { combineReducers } from 'redux'
+import { RECEIVE_BLOGS, REQUEST_BLOGS } from '../actions/blogActions'
 
 
-export default function blogs(state = {
-  isFetching: false,
-  blogs: []
+export default function reducer(state = {
+  blogs: [],
+  fetching: false,
+  fetched: false,
+  error: null
 }, action) {
   switch (action.type) {
-    case REQUEST_BLOGS:
+    case "REQUEST_BLOGS":
       return Object.assign({}, state, {
-        isFetching: true
+        fetching: true
       })
-    case RECEIVE_BLOGS:
+    case "RECEIVE_BLOGS":
       return Object.assign({}, state, {
-        isFetching: false,
-        blogs: []
+        fetching: false,
+        fetched: true,
+        blogs: action.blogs
       })
     default:
       return state
   }
 }
+
+// export default function reducer(state ={
+//   blogs: [],
+//   fetching: false,
+//   fetched: false,
+//   error: null
+// }, action) {
+//   switch(action.type) {
+//     case "FETCH_BLOGS": {
+//       return {...state, fetching: true}
+//     }
+//     case "FETCH_BLOGS_FULFILLED": {
+//       return {...state, fetching: false, fetched: true, blogs: action.payload}
+//     }
+//     case "FETCH_BLOGS_REJECTED": {
+//       return {...state, fetching: false, error: action.payload}
+//     }
+//   }
+//   return state
+// }
+
+
+// import {
+//   REQUEST_BLOGS, RECEIVE_BLOGS
+// } from '../actions/blogActions'
+//
+//
+// export default function blogs(state = {
+//   isFetching: false,
+//   blogs: []
+// }, action) {
+//   switch (action.type) {
+//     case REQUEST_BLOGS:
+//       return Object.assign({}, state, {
+//         isFetching: true
+//       })
+//     case RECEIVE_BLOGS:
+//       return Object.assign({}, state, {
+//         isFetching: false,
+//         blogs: []
+//       })
+//     default:
+//       return state
+//   }
+// }
 
 // const blog = (state = {
 //   blogs: []

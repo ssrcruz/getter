@@ -1,18 +1,37 @@
 import React from 'react'
-// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw, ContentState} from 'draft-js'
 
-
-const Blog = ({ onClick, completed, title }) => (
-  <li
-    onClick={onClick}
-    style={{
-      textDecoration: completed ? 'line-through' : 'none'
-    }}
-  >
+const Blog = ({title, description}) => (
+  <div>
     {title}
-  </li>
+    <Editor
+      editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(description)))}
+    />
+  </div>
 )
+
+export default Blog
+// export default class Blog extends React.Component {
+//   render() {
+//     return (
+
+//     )
+//   }
+// }
+// import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+
+
+// const Blog = ({ onClick, completed, title }) => (
+//   <li
+//     onClick={onClick}
+//     style={{
+//       textDecoration: completed ? 'line-through' : 'none'
+//     }}
+//   >
+//     {title}
+//   </li>
+// )
   // constructor(props) {
   //   super(props);
   //   this.state = {editable: false};
@@ -42,9 +61,9 @@ const Blog = ({ onClick, completed, title }) => (
 //             {this.props.title}
 //             <Route path={`/blogs/${this.props.id}`} />
 //           </Link>
-//           <Editor
-//             editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.description)))}
-//           />
+          // <Editor
+          //   editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.description)))}
+          // />
 //           <button className='btn btn-primary'>Delete</button>
 //           <button className='btn btn-primary'></button>
 //         </div>

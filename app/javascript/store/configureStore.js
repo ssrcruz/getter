@@ -13,18 +13,21 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
-import blogs from '../reducers/blogsReducer'
+import promise from 'redux-promise-middleware'
+import reducer from '../reducers/blogsReducer'
 
+const middleware = applyMiddleware(promise(), thunkMiddleware, createLogger())
 
-const loggerMiddleware = createLogger()
-
-export default function configureStore(preloadedState) {
-  return createStore(
-    blogs,
-    preloadedState,
-    applyMiddleware(
-      thunkMiddleware,
-      loggerMiddleware
-    )
-  )
-}
+export default createStore(reducer, middleware)
+// const loggerMiddleware = createLogger()
+//
+// export default function configureStore(preloadedState) {
+//   return createStore(
+//     blogs,
+//     preloadedState,
+//     applyMiddleware(
+//       thunkMiddleware,
+//       loggerMiddleware
+//     )
+//   )
+// }

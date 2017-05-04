@@ -1,25 +1,48 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-// import Blog from './Blog'
+// import PropTypes from 'prop-types'
+import Blog from './Blog'
 
-
-class BlogList extends Component {
-  render() {
-    return (
-      <ul>
-        {this.props.blogs.map((post, i) =>
-          <li key={i}>{blog.title}{blog.description}</li>
-        )}
-      </ul>
-    )
-  }
-}
-
-BlogList.propTypes = {
-  blogs: PropTypes.array.isRequired
-}
+const BlogList = ({blogs}) => (
+  <ul>
+    {blogs.map(blog =>
+      <Blog {...blog} key={blog.id} />
+    )}
+  </ul>
+)
 
 export default BlogList
+// export default class BlogList extends Component {
+//   render() {
+//     var blogNodes = blogs.map((blog) => {
+//       return (
+//         <Blog title={blog.title} description={blog.description} id={blog.id}>
+//           {blog.title}
+//         </Blog>
+//       )
+//     })
+//     return (
+//       <div>
+//         <h1>Blogs</h1>
+//         {blogNodes}
+//       </div>
+//     )
+//   }
+// }
+  // render() {
+  //   return (
+  //     <ul>
+  //       {this.props.blogs.map((post, i) =>
+  //         <li key={i}>{blog.title}{blog.description}</li>
+  //       )}
+  //     </ul>
+  //   )
+  // }
+// }
+//
+// BlogList.propTypes = {
+//   blogs: PropTypes.array.isRequired
+// }
+
 
   // componentWillMount() {
   //   this.props.dispatch(fetchBlogs());

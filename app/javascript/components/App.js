@@ -1,12 +1,44 @@
 import React from 'react'
-// import { connect } from 'react-redux'
-// import Blog from './Blog';
+import BlogList from './BlogList'
+import { fetchBlogs } from '../actions/blogActions'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Header from './Header'
+
+class App extends React.Component {
+  componentDidMount() {
+    let { dispatch } = this.props
+    dispatch(fetchBlogs())
+  }
+
+  render() {
+    let { blogs, dispatch } = this.props
+    let boundActionCreators = bindActionCreators(fetchBlogs(), dispatch)
+    return (
+      <div>
+        <MuiThemeProvider>
+          <Header />
+        </MuiThemeProvider>
+        Blog List
+        <BlogList blogs={blogs}
+                  {...boundActionCreators} />
+      </div>
+    )
+  }
+}
+
+export default connect(
+  state => ({ blogs: state.blogs })
+)(App)
+// import Blog from './Blog';
+// import Header from './Header'
 // import BlogList from './BlogList'
-import AddBlog from '../containers/AddBlog'
-import VisibleBlogList from '../containers/VisibleBlogList'
+// import AddBlog from '../containers/AddBlog'
+// import VisibleBlogList from '../containers/VisibleBlogList'
 // import { fetchBlogs } from '../actions/blogActions'
-// import { bindActionCreators } from 'redux'
+
 
 // function mapStateToProps(state) {
 //   return { blogs: state.blogs }
@@ -16,23 +48,20 @@ import VisibleBlogList from '../containers/VisibleBlogList'
 //   return bindActionCreators({"FETCH_BLOGS":fetchBlogs}, dispatch)
 // }
 
-// Blogs.propTypes = {
-//   fetchBlogs: PropTypes.func.isRequired
-//   dispatch: PropTypes.func.isRequired
-// }
+
 // export default connect(mapStateToProps, mapDispatchToProp)(BlogList)
 
 // connect(mapStateToProps, mapDispatchToProps)(BlogList)
 
-const App = () => (
-  <div>
-    <Header />
-    <AddBlog />
-    <VisibleBlogList />
-  </div>
-)
-
-export default App
+// const App = () => (
+//   <div>
+//     <Header />
+//     <AddBlog />
+//     <VisibleBlogList />
+//   </div>
+// )
+//
+// export default App
   // componentWillMount() {
   //   this.props.dispatch(fetchBlogs());
   // }
