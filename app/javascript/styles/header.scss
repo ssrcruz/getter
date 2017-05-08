@@ -2,7 +2,6 @@
   display: flex;
   -ms-align-items: center;
   align-items: center;
-  margin-left: 50px;
   li {
     padding-top: 20px;
     text-align: center;
@@ -11,9 +10,9 @@
     a {
       color: white;
       text-decoration: none;
-    }
-    &.active {
-      font-weight: bold;
+      &.active {
+        font-weight: bold;
+      }
     }
   }
 }

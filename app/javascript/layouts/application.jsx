@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 import Header from '../components/Header'
 
 const ApplicationLayout = () => (
-  <div className="">
+  <div>
     <Header />
   </div>
 )
