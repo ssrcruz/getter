@@ -8,11 +8,24 @@ import {
 // import { Contact } from './contact'
 // import { NewBlog } from './new_blog'
 // import { App } from './App'
-const Header = () => (
-  <p>
-    Header
-  </p>
-)
+import Appbar from 'muicss/lib/react/appbar'
+import '../styles/header.scss'
+
+const activeClass = (path) => (location.pathname === path ? 'active' : '')
+
+class Header extends React.Component {
+  render() {
+    return (
+      <Appbar title="BLG">
+        <ul className="nav">
+          <li><a className={activeClass('/')} href="/">Home</a></li>
+          <li><a className={activeClass('/about')} href="/about">About</a></li>
+          <li><a className={activeClass('/contact')} href="/contact">Contact</a></li>
+        </ul>
+      </Appbar>
+    )
+  }
+}
 
 export default Header
 // const Home = () => (

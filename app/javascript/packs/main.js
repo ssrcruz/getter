@@ -6,8 +6,6 @@ import store from '../store/configureStore'
 import AppComponent from '../components/App'
 import { Provider } from 'react-redux'
 import { connect } from 'react-redux'
-import Header from '../components/Header'
-
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(

@@ -1,4 +1,5 @@
 // Common configuration for webpacker loaded from config/webpack/paths.yml
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const { join, resolve } = require('path')
 const { env } = require('process')
@@ -26,9 +27,17 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           presets: ['react', 'es2015', 'stage-0'],
-          plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
+          plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy',
+          ],
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new ExtractTextPlugin({
+      filename: '.../app/javascript/styles/header.css',
+			disable: false,
+			allChunks: true
+    })
+  ]
 }
