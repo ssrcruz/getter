@@ -4,6 +4,8 @@ module.exports = {
   test: /\.(scss|sass|css)$/i,
   use: ExtractTextPlugin.extract({
     fallback: 'style-loader',
-    use: ['css-loader', 'postcss-loader', 'sass-loader']
+    use: [ { loader: 'css-loader' },
+          'postcss-loader',
+          'sass-loader']
   })
 }

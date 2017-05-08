@@ -19,7 +19,7 @@ class Api::V1::BlogsController < Api::V1::BaseController
 
   def show
     blog = Blog.find(params["id"])
-    repond_with blog, json: blog
+    respond_with blog, json: blog
   end
 
   private

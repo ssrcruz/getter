@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Header from './Header'
+import Layout from '../layouts/application'
 
 class App extends React.Component {
   componentDidMount() {
@@ -18,9 +19,7 @@ class App extends React.Component {
     let boundActionCreators = bindActionCreators(fetchBlogs(), dispatch)
     return (
       <div>
-        <MuiThemeProvider>
-          <Header />
-        </MuiThemeProvider>
+        <Layout />
         Blog List
         <BlogList blogs={blogs}
                   {...boundActionCreators} />
