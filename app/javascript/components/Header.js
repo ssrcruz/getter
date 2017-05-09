@@ -4,10 +4,9 @@ import {
   Route,
   Link
 } from 'react-router-dom'
-// import { BlogList } from './BlogList'
-// import { Contact } from './contact'
-// import { NewBlog } from './new_blog'
-// import { App } from './App'
+import About from './About'
+import Contact from './Contact'
+import NewBlog from './new_blog'
 import Appbar from 'muicss/lib/react/appbar'
 import '../styles/header.scss'
 
@@ -16,27 +15,24 @@ const activeClass = (path) => (location.pathname === path ? 'active' : '')
 class Header extends React.Component {
   render() {
     return (
-      <Appbar>
-        <ul className="nav">
-          <li><a className={activeClass('/')} href="/">Home</a></li>
-          <li><a className={activeClass('/about')} href="/about">About</a></li>
-          <li><a className={activeClass('/contact')} href="/contact">Contact</a></li>
-          <li><a className={activeClass('/newblog')} href="/newblog">New Blog</a></li>
-        </ul>
-      </Appbar>
+      <Router>
+        <div>
+          <Appbar>
+            <ul className="nav">
+              <li><Link to="/" className={activeClass('/')}>Home</Link></li>
+              <li><Link to="/about" className={activeClass('/about')}>About</Link></li>
+              <li><Link to="/contact" className={activeClass('/contact')}>Contact</Link></li>
+              <li><Link to="/newblog" className={activeClass('/newblog')}>New Blog</Link></li>
+            </ul>
+          </Appbar>
+          <Route exact path="/"/>
+          <Route path="/about" component={About}/>
+          <Route path="/contact" component={Contact}/>
+          <Route path="/newblog" component={NewBlog}/>
+        </div>
+      </Router>
     )
   }
 }
 
 export default Header
-// const Home = () => (
-//   <div>
-//     <h2>Home</h2>
-//   </div>
-// )
-//
-// const About = () => (
-//   <div>
-//     <h2>About</h2>
-//   </div>
-// )

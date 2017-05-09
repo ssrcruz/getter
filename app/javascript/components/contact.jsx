@@ -1,12 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Layout from '../layouts/application'
 
-export class Contact extends React.Component {
-  render() {
-    return(
-      <div>
-        Contact Stuff
-      </div>
-    )
-  }
-}
+const Contact = () => (
+  <div>
+    Contact Stuff
+  </div>
+)
+
+export default Contact
