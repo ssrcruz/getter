@@ -15,11 +15,3 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('root')
   )
 })
-// document.addEventListener('DOMContentLoaded', () => {
-//   ReactDOM.render(
-//     <Root />,
-//     document.getElementById('root')
-//   )
-// })
-
-// store.dispatch({type: 'FETCH_BLOGS_FULFILLED'})

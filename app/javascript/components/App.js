@@ -4,7 +4,6 @@ import { fetchBlogs } from '../actions/blogActions'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Header from './Header'
 import Layout from '../layouts/application'
 
