@@ -6,13 +6,21 @@ import store from '../store/configureStore'
 import { Provider } from 'react-redux'
 import { connect } from 'react-redux'
 import AppComponent from '../components/App'
+import Contact from '../components/Contact'
+import About from '../components/About'
+import NewBlog from '../components/new_blog'
+import Home from '../components/Home'
+import WebpackerReact from 'webpacker-react'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+import Turbolinks from 'turbolinks'
 
+injectTapEventPlugin()
 
-document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-    <Provider store={store}>
-      <AppComponent/>
-    </Provider>,
-    document.getElementById('root')
-  )
+Turbolinks.start()
+
+WebpackerReact.setup({
+  Home,
+  Contact,
+  About,
+  NewBlog
 })

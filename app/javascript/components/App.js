@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux'
 import Header from './Header'
 import Layout from '../layouts/application'
 
+
 class App extends React.Component {
   componentDidMount() {
     let { dispatch } = this.props

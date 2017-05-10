@@ -92,35 +92,38 @@ export class NewBlog extends React.Component {
 
     return (
       <Router>
-        <div className="container">
-          <Editor editorState={EditorState.createWithContent(this.state.editorState.getCurrentContent())} />
-          <form>
-            <div className="form-group">
-              <label htmlFor="formGroupExampleInput">Title:</label>
-              <input ref='title' type='text' className='form-control' placeholder='Enter Title' />
+        <div>
+          <Layout />
+            <div className="container">
+              <Editor editorState={EditorState.createWithContent(this.state.editorState.getCurrentContent())} />
+              <form>
+                <div className="form-group">
+                  <label htmlFor="formGroupExampleInput">Title:</label>
+                  <input ref='title' type='text' className='form-control' placeholder='Enter Title' />
+                </div>
+                <BlockStyleControls
+                  editorState={editorState}
+                  onToggle={this.toggleBlockType}
+                />
+                <InlineStyleControls
+                  editorState={editorState}
+                  onToggle={this.toggleBlockType}
+                />
+                <div className={className} onClick={this.focus}>
+                  <Editor
+                    blockStyleFn={getBlockStyle}
+                    customStyleMap={styleMap}
+                    editorState={editorState}
+                    handleKeyCommand={this.handleKeyCommand}
+                    onChange={this.onChange}
+                    placeholder="Tell a story ..."
+                    ref="description"
+                    spellCheck={true}
+                  />
+                </div>
+                <button onClick={this.handleClick.bind(this)} type='button' className='btn btn-primary'>Publish Article</button>
+              </form>
             </div>
-            <BlockStyleControls
-              editorState={editorState}
-              onToggle={this.toggleBlockType}
-            />
-            <InlineStyleControls
-              editorState={editorState}
-              onToggle={this.toggleBlockType}
-            />
-            <div className={className} onClick={this.focus}>
-              <Editor
-                blockStyleFn={getBlockStyle}
-                customStyleMap={styleMap}
-                editorState={editorState}
-                handleKeyCommand={this.handleKeyCommand}
-                onChange={this.onChange}
-                placeholder="Tell a story ..."
-                ref="description"
-                spellCheck={true}
-              />
-            </div>
-            <button onClick={this.handleClick.bind(this)} type='button' className='btn btn-primary'>Publish Article</button>
-          </form>
         </div>
       </Router>
     )

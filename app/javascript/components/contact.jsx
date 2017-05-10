@@ -4,6 +4,7 @@ import Layout from '../layouts/application'
 
 const Contact = () => (
   <div>
+    <Layout />
     Contact Stuff
   </div>
 )
