@@ -20,7 +20,6 @@ class App extends React.Component {
     return (
       <div>
         <Layout />
-        Blog List
         <BlogList blogs={blogs}
                   {...boundActionCreators} />
       </div>
