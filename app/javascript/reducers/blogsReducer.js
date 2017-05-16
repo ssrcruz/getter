@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { RECEIVE_BLOGS, REQUEST_BLOGS } from '../actions/blogActions'
+import { RECEIVE_BLOGS, REQUEST_BLOGS, ADD_BLOG } from '../actions/blogActions'
 
 
 export default function reducer(state = {
@@ -18,6 +18,10 @@ export default function reducer(state = {
         fetching: false,
         fetched: true,
         blogs: action.blogs
+      })
+    case "ADD_BLOG":
+      return Object.assign({}, state, {
+        blogs: [...state.blogs, action]
       })
     default:
       return state

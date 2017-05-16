@@ -1,8 +1,31 @@
-// import axios from 'axios'
 import fetch from 'isomorphic-fetch'
+import $ from 'jquery'
 
 export const REQUEST_BLOGS = 'REQUEST_BLOGS'
 export const RECEIVE_BLOGS = 'RECEIVE_BLOGS'
+export const ADD_BLOG = 'ADD_BLOG'
+
+
+export function addBlog(data) {
+  const request = $.ajax({
+    url: 'api/v1/blogs',
+    type: 'POST',
+    data: data,
+    dataType: 'json'
+  })
+  // const request = fetch(`/api/v1/blogs.json`, {
+  //   method: 'POST',
+  //   body: data,
+  //   headers: {
+  //     'Accept': 'application/json',
+  //     'Content-Type': 'application/json'
+  //   }
+  // })
+  return {
+    type: ADD_BLOG,
+    payload: request
+  }
+}
 
 function requestBlogs() {
   return {
@@ -30,15 +53,3 @@ export function fetchBlogs() {
       .then(json => dispatch(receiveBlogs(json)))
   }
 }
-
-// export function fetchBlogs(){
-//   return function(dispatch){
-//     axios.get('/api/v1/blogs.json')
-//       .then((response) => {
-//         dispatch({type: 'FETCH_BLOGS_FULFILLED', data: response.data });
-//       })
-//       .catch((err) => {
-//         dispatch({type: 'FETCH_BLOGS_REJECTED', payload: err});
-//       })
-//   }
-// }

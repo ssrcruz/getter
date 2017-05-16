@@ -1,13 +1,4 @@
-import { combineReducers } from "redux"
-import blogs from "./blogsReducer"
-// import visibilityFilter from './visibilityFilter'
-//
-// const blogApp = combineReducers({
-//   blogs,
-//   visibilityFilter
+// import { combineReducers } from "redux"
+// export default combineReducers({
+//   blogs
 // })
-//
-// export default blogApp
-export default combineReducers({
-  blogs
-})

@@ -15,12 +15,12 @@ class App extends React.Component {
   }
 
   render() {
-    let { blogs, dispatch } = this.props
-    let boundActionCreators = bindActionCreators(fetchBlogs(), dispatch)
+    // let { blogs, dispatch } = this.props
+    let boundActionCreators = bindActionCreators(fetchBlogs(), this.props.dispatch)
     return (
       <div>
         <Layout />
-        <BlogList blogs={blogs}
+        <BlogList blogs={this.props.blogs}
                   {...boundActionCreators} />
       </div>
     )
