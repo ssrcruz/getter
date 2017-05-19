@@ -1,15 +1,26 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw} from 'draft-js'
+import { Editor, EditorState, RichUtils, convertToRaw, convertFromRaw } from 'draft-js'
+// import Editor from 'draft-js-plugins-editor'
+// import 'draft-js-side-toolbar-plugin/lib/plugin.css'
+// import createSideToolbarPlugin from 'draft-js-side-toolbar-plugin'
+// import editorStyles from '../styles/editorStyles.css'
 import Layout from '../layouts/application'
 import { addBlog } from '../actions/blogActions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { styleMap, BlockStyleControls, InlineStyleControls, getBlockStyle } from './RichEditor' 
+import '../styles/editorStyles.css'
+
+// const sideToolbarPlugin = createSideToolbarPlugin()
+// const { SideToolbar } = sideToolbarPlugin
+// const plugins = [sideToolbarPlugin]
+
+// const text = "Tell your story"
 
 class NewBlog extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {editorState: EditorState.createEmpty()}
+    this.state = { editorState: EditorState.createEmpty() }
     this.focus = () => this.refs.description.focus()
     this.onChange = (editorState) => this.setState({editorState})
 
@@ -17,26 +28,15 @@ class NewBlog extends React.Component {
     this.toggleBlockType = (type) => this._toggleBlockType(type)
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style)
   }
-  // How to get the data from the server
-  // componentDidMount() {
-  //   $.getJSON('/api/v1/blogs.json', (response) => { this.setState({ blogs: response }) })
-  // }
-
-  // pass a function as a property down the hierarchy
-  // _handleSubmit(blog) {
-  //   // add new blog to the blog array
-  //   var newState = this.state.blogs.concat(blog);
-  //   this.setState({ blogs: newState });
-  // }
 
   _handleKeyCommand(command) {
-    const {editorState} = this.state;
-    const newState = RichUtils.handleKeyCommand(editorState, command);
+    const {editorState} = this.state
+    const newState = RichUtils.handleKeyCommand(editorState, command)
     if (newState) {
-      this.onChange(newState);
-      return true;
+      this.onChange(newState)
+      return true
     }
-    return false;
+    return false
   }
 
   _toggleBlockType(blockType) {
@@ -45,7 +45,7 @@ class NewBlog extends React.Component {
         this.state.editorState,
         blockType
       )
-    );
+    )
   }
 
   _toggleInlineStyle(inlineStyle) {
@@ -54,170 +54,65 @@ class NewBlog extends React.Component {
         this.state.editorState,
         inlineStyle
       )
-    );
+    )
   }
 
   handleClick(e) {
     e.preventDefault()
     // how to get the value of the input fields
-    var title = this.refs.title.value;
-    var description = this.refs.description.value;
+    var title = this.refs.title.value
+    var description = this.refs.description.value
     let { dispatch } = this.props
-
-    const contentState = this.state.editorState.getCurrentContent();
-    const rawDraftContentState = convertToRaw(contentState);
-
+    // grabs the current content state
+    const contentState = this.state.editorState.getCurrentContent()
+    // converts the content to raw json
+    const rawDraftContentState = convertToRaw(contentState)
+    // turn the raw json content state into a string to be stored in the database
     var data = { blog: { title: title, description: JSON.stringify(rawDraftContentState) } }
     dispatch(addBlog(data))
   }
 
   render() {
-    const {editorState} = this.state;
-    let className = 'RichEditor-editor';
-    var contentState = editorState.getCurrentContent();
+    const { editorState } = this.state
+    let className = 'RichEditor-editor'
+    var contentState = editorState.getCurrentContent()
     if (!contentState.hasText()) {
       if (contentState.getBlockMap().first().getType() !== 'unstyled') {
-        className += 'RichEditor-hidePlaceholder';
+        className += 'RichEditor-hidePlaceholder'
       }
     }
-
     return (
-        <div>
-          <Layout />
-            <div className="container">
-              <Editor editorState={EditorState.createWithContent(this.state.editorState.getCurrentContent())} />
-              <form>
-                <div className="form-group">
-                  <label htmlFor="formGroupExampleInput">Title:</label>
-                  <input ref='title' type='text' className='form-control' placeholder='Enter Title' />
-                </div>
-                <BlockStyleControls
-                  editorState={editorState}
-                  onToggle={this.toggleBlockType}
-                />
-                <InlineStyleControls
-                  editorState={editorState}
-                  onToggle={this.toggleBlockType}
-                />
-                <div className={className} onClick={this.focus}>
-                  <Editor
-                    blockStyleFn={getBlockStyle}
-                    customStyleMap={styleMap}
-                    editorState={editorState}
-                    handleKeyCommand={this.handleKeyCommand}
-                    onChange={this.onChange}
-                    placeholder="Tell a story ..."
-                    ref="description"
-                    spellCheck={true}
-                  />
-                </div>
-                <button onClick={this.handleClick.bind(this)} type='button' className='btn btn-primary'>Publish Article</button>
-              </form>
-            </div>
-        </div>
+      <div>
+        <Layout />
+          <div className="form-group">
+            <input ref="title" type="text" placeholder="Title" />
+          </div>
+        <form className="RichEditor-root">
+          <BlockStyleControls
+            editorState={editorState}
+            onToggle={this.toggleBlockType}
+          />
+          <InlineStyleControls
+            editorState={editorState}
+            onToggle={this.toggleInlineStyle}
+          />
+          <div className={className} onClick={this.focus}>
+            <Editor
+              blockStyleFn={getBlockStyle}
+              customStyleMap={styleMap}
+              editorState={editorState}
+              handleKeyCommand={this.handleKeyCommand}
+              onChange={this.onChange}
+              ref="description"
+              spellCheck={true}
+            />
+          </div>
+        </form>
+        <button onClick={this.handleClick.bind(this)}>Submit Blog</button>
+      </div>
     )
   }
 }
-
-// Custom overrides for "code" style.
-const styleMap = {
-  CODE: {
-    backgroundColor: 'rgba(0, 0, 0, 0.05)',
-    fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
-    fontSize: 16,
-    padding: 2,
-  },
-};
-
-function getBlockStyle(block) {
-  switch (block.getType()) {
-    case 'blockquote': return 'RichEditor-blockquote';
-    default: return null;
-  }
-}
-
-class StyleButton extends React.Component {
-  constructor() {
-    super();
-    this.onToggle = (e) => {
-      e.preventDefault();
-      this.props.onToggle(this.props.style);
-    };
-  }
-
-  render() {
-    let className = 'RichEditor-styleButton';
-    if (this.props.active) {
-      className += ' RichEditor-activeButton';
-    }
-
-    return (
-      <span className={className} onMouseDown={this.onToggle}>
-        {this.props.label}
-      </span>
-    );
-  }
-}
-
-const BLOCK_TYPES = [
-  {label: 'H1', style: 'header-one'},
-  {label: 'H2', style: 'header-two'},
-  {label: 'H3', style: 'header-three'},
-  {label: 'H4', style: 'header-four'},
-  {label: 'H5', style: 'header-five'},
-  {label: 'H6', style: 'header-six'},
-  {label: 'Blockquote', style: 'blockquote'},
-  {label: 'UL', style: 'unordered-list-item'},
-  {label: 'OL', style: 'ordered-list-item'},
-  {label: 'Code Block', style: 'code-block'},
-];
-
-const BlockStyleControls = (props) => {
-  const {editorState} = props;
-  const selection = editorState.getSelection();
-  const blockType = editorState
-    .getCurrentContent()
-    .getBlockForKey(selection.getStartKey())
-    .getType();
-
-  return (
-    <div className="RichEditor-controls">
-      {BLOCK_TYPES.map((type) =>
-        <StyleButton
-          key={type.label}
-          active={type.style === blockType}
-          label={type.label}
-          onToggle={props.onToggle}
-          style={type.style}
-        />
-      )}
-    </div>
-  );
-};
-
-var INLINE_STYLES = [
-  {label: 'Bold', style: 'BOLD'},
-  {label: 'Italic', style: 'ITALIC'},
-  {label: 'Underline', style: 'UNDERLINE'},
-  {label: 'Monospace', style: 'CODE'},
-];
-
-const InlineStyleControls = (props) => {
-  var currentStyle = props.editorState.getCurrentInlineStyle();
-  return (
-    <div className="RichEditor-controls">
-      {INLINE_STYLES.map(type =>
-        <StyleButton
-          key={type.label}
-          active={currentStyle.has(type.style)}
-          label={type.label}
-          onToggle={props.onToggle}
-          style={type.style}
-        />
-      )}
-    </div>
-  );
-};
 
 export default connect(
   state => ({ blogs: state.blogs })

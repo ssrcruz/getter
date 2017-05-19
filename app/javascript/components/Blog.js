@@ -5,6 +5,7 @@ const Blog = ({title, description}) => (
   <div>
     {title}
     <Editor
+      readOnly={true}
       editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(description)))}
     />
   </div>

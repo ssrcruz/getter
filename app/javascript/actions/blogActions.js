@@ -1,5 +1,6 @@
-import fetch from 'isomorphic-fetch'
+// import fetch from 'isomorphic-fetch'
 import $ from 'jquery'
+import 'whatwg-fetch'
 
 export const REQUEST_BLOGS = 'REQUEST_BLOGS'
 export const RECEIVE_BLOGS = 'RECEIVE_BLOGS'
@@ -13,11 +14,10 @@ export function addBlog(data) {
     data: data,
     dataType: 'json'
   })
-  // const request = fetch(`/api/v1/blogs.json`, {
+  // const request = fetch(`/api/v1/blogs`, {
   //   method: 'POST',
   //   body: data,
   //   headers: {
-  //     'Accept': 'application/json',
   //     'Content-Type': 'application/json'
   //   }
   // })

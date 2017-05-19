@@ -32,12 +32,5 @@ module.exports = {
         }
       }
     ]
-  },
-  plugins: [
-    new ExtractTextPlugin({
-      filename: '.../app/javascript/styles/header.css',
-			disable: false,
-			allChunks: true
-    })
-  ]
+  }
 }
