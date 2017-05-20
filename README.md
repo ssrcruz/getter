@@ -1,24 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby 2.3.3
+Rails 5.1.0
+React 15.4.2
+Webpack 2.5.1
+Yarn 0.24
 
-Things you may want to cover:
+Configuration - 
 
-* Ruby version
+bundle install
 
-* System dependencies
+rails webpacker:install:react
 
-* Configuration
+To run server:
 
-* Database creation
+./bin/server
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+visit localhost:5000
