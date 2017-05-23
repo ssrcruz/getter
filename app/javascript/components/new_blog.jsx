@@ -1,5 +1,5 @@
 import React from 'react'
-import { Editor, EditorState, RichUtils, convertToRaw, convertFromRaw } from 'draft-js'
+import { Editor, EditorState, RichUtils, convertToRaw, convertFromRaw, getDefaultKeyBinding } from 'draft-js'
 // import Editor from 'draft-js-plugins-editor'
 // import 'draft-js-side-toolbar-plugin/lib/plugin.css'
 // import createSideToolbarPlugin from 'draft-js-side-toolbar-plugin'
@@ -8,7 +8,11 @@ import Layout from '../layouts/application'
 import { addBlog } from '../actions/blogActions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { styleMap, BlockStyleControls, InlineStyleControls, getBlockStyle } from './RichEditor' 
+import { styleMap, BlockStyleControls, InlineStyleControls, getBlockStyle } from './RichEditor'
+// import CodeUtils from 'draft-js-code'
+import { PrismDraftDecorator } from '../decorators/decorator'
+import Prism from 'prismjs'
+// import 'draft-js-prism/prism/themes/prism-coy.css'
 import '../styles/editorStyles.css'
 
 // const sideToolbarPlugin = createSideToolbarPlugin()
@@ -20,18 +24,20 @@ import '../styles/editorStyles.css'
 class NewBlog extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { editorState: EditorState.createEmpty() }
+    var decorator = new PrismDraftDecorator(Prism.languages.javascript)
+    this.state = { editorState: EditorState.createEmpty(decorator) }
     this.focus = () => this.refs.description.focus()
     this.onChange = (editorState) => this.setState({editorState})
 
-    this.handleKeyCommand = (command) => this._handleKeyCommand(command)
+    this.handleKeyCommand = this.handleKeyCommand.bind(this)
     this.toggleBlockType = (type) => this._toggleBlockType(type)
     this.toggleInlineStyle = (style) => this._toggleInlineStyle(style)
   }
 
-  _handleKeyCommand(command) {
-    const {editorState} = this.state
+  handleKeyCommand(command) {
+    const { editorState } = this.state
     const newState = RichUtils.handleKeyCommand(editorState, command)
+
     if (newState) {
       this.onChange(newState)
       return true
@@ -102,6 +108,7 @@ class NewBlog extends React.Component {
               customStyleMap={styleMap}
               editorState={editorState}
               handleKeyCommand={this.handleKeyCommand}
+              onTab={this.handleTab}
               onChange={this.onChange}
               ref="description"
               spellCheck={true}

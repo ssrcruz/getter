@@ -10,15 +10,12 @@ export const styleMap = {
   },
 }
 
-// adds a blockquote css element with a className of RichEditor-blockquote
+// adds a blockquote css element with a className
 export function getBlockStyle(block) {
   switch (block.getType()) {
     default: return null
     case 'blockquote': return 'RichEditor-blockquote'
     case 'code-block': return 'RichEditor-codeblock'
-  }
-  switch (block.getType()) {
-
   }
 }
 

@@ -1,5 +1,5 @@
 .RichEditor-root {
-  background: #fff;
+  background: floralwhite;
   border: 1px solid #ddd;
   font-family: 'Georgia', serif;
   font-size: 14px;
@@ -25,6 +25,21 @@
   cursor: pointer;
   margin-right: 16px;
   padding: 2px 0;
+}
+
+.RichEditor-codeblock {
+  /*background: white;*/
+  color: black;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+}
+
+.public-DraftStyleDefault-pre {
+  background: #fdfdfd;
 }
 
 .RichEditor-activeButton {
