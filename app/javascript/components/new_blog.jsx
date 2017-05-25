@@ -7,7 +7,6 @@ import { Editor, EditorState, RichUtils, convertToRaw, convertFromRaw, getDefaul
 import Layout from '../layouts/application'
 import { addBlog } from '../actions/blogActions'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { styleMap, BlockStyleControls, InlineStyleControls, getBlockStyle } from './RichEditor'
 // import CodeUtils from 'draft-js-code'
 import { PrismDraftDecorator } from '../decorators/decorator'
