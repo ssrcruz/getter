@@ -1,10 +1,11 @@
-// import fetch from 'isomorphic-fetch'
 import $ from 'jquery'
 import 'whatwg-fetch'
 
 export const REQUEST_BLOGS = 'REQUEST_BLOGS'
 export const RECEIVE_BLOGS = 'RECEIVE_BLOGS'
 export const ADD_BLOG = 'ADD_BLOG'
+export const DELETE_BLOG = 'DELETE_BLOG'
+export const DELETE_BLOG_FULFILLED = 'DELETE_BLOG_FULFILLED'
 
 
 export function addBlog(data) {
@@ -14,16 +15,36 @@ export function addBlog(data) {
     data: data,
     dataType: 'json'
   })
-  // const request = fetch(`/api/v1/blogs`, {
-  //   method: 'POST',
-  //   body: data,
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   }
-  // })
   return {
     type: ADD_BLOG,
     payload: request
+  }
+}
+
+export function handleDelete(id) {
+  return {
+    type: DELETE_BLOG,
+    blogId: id
+  }
+}
+
+export function deleteBlogSuccess() {
+  return {
+    type: DELETE_BLOG_FULFILLED
+  }
+}
+
+export function deleteBlog(id) {
+  return function (dispatch) {
+    const request = fetch(`/api/v1/blogs/${id}`, {
+      method: 'DELETE'
+    }).then(() => {
+      dispatch(handleDelete(id))
+    }).then(() => {
+      dispatch(deleteBlogSuccess())
+    }).catch(error => {
+      throw(error)
+    })
   }
 }
 
@@ -37,6 +58,13 @@ function receiveBlogs(json) {
   return {
     type: RECEIVE_BLOGS,
     blogs: json
+  }
+}
+
+function fetchBlogsFailure(error) {
+  return {
+    type: FETCH_BLOGS_FAILURE,
+    blogs: error
   }
 }
 
