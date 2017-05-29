@@ -9,18 +9,36 @@ export const DELETE_BLOG_FULFILLED = 'DELETE_BLOG_FULFILLED'
 
 
 export function addBlog(data) {
-  const request = $.ajax({
-    url: 'api/v1/blogs',
-    type: 'POST',
-    data: data,
-    dataType: 'json'
-  })
-  return {
-    type: ADD_BLOG,
-    payload: request
+  // const headers = Object.assign({'Content-Type': 'application/json'}, this.requestHeaders())
+  return function (dispatch) {
+    const request = fetch(`/api/v1/blogs`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }).then(() => {
+      dispatch(handleAdd(data))
+    })
   }
+  // const request = $.ajax({
+  //   url: 'api/v1/blogs',
+  //   type: 'POST',
+  //   data: data,
+  //   dataType: 'json'
+  // })
+  // return {
+  //   type: ADD_BLOG,
+  //   payload: request
+  // }
 }
 
+function handleAdd(data) {
+  return {
+    type: ADD_BLOG,
+    blog: data
+  }
+}
 export function handleDelete(id) {
   return {
     type: DELETE_BLOG,
