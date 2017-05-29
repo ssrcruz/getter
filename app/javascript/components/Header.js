@@ -4,10 +4,6 @@ import {
   Route,
   Link
 } from 'react-router-dom'
-import HomeWithProvider from './Home'
-import About from './About'
-import Contact from './Contact'
-import NewBlog from './new_blog'
 import Appbar from 'muicss/lib/react/appbar'
 import '../styles/header.scss'
 
