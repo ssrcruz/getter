@@ -73,7 +73,7 @@ class NewBlog extends React.Component {
     // converts the content to raw json
     const rawDraftContentState = convertToRaw(contentState)
     // turn the raw json content state into a string to be stored in the database
-    var data = { blog: { title: title, description: rawDraftContentState } }
+    var data = { blog: { title: title, description: JSON.stringify(rawDraftContentState) } }
     dispatch(addBlog(data))
   }
 
