@@ -1,29 +1,19 @@
 import React from 'react'
 import { Editor, EditorState, RichUtils, convertToRaw, convertFromRaw, getDefaultKeyBinding } from 'draft-js'
-// import Editor from 'draft-js-plugins-editor'
-// import 'draft-js-side-toolbar-plugin/lib/plugin.css'
-// import createSideToolbarPlugin from 'draft-js-side-toolbar-plugin'
-// import editorStyles from '../styles/editorStyles.css'
 import Layout from '../layouts/application'
 import { addBlog } from '../actions/blogActions'
 import { connect } from 'react-redux'
-import { styleMap, BlockStyleControls, InlineStyleControls, getBlockStyle } from './RichEditor'
-// import CodeUtils from 'draft-js-code'
+import { styleMap,
+         BlockStyleControls,
+         InlineStyleControls,
+         getBlockStyle } from './RichEditor'
 import { PrismDraftDecorator } from '../decorators/decorator'
 import Prism from 'prismjs'
-// import 'draft-js-prism/prism/themes/prism-coy.css'
 import '../styles/editorStyles.css'
-
-// const sideToolbarPlugin = createSideToolbarPlugin()
-// const { SideToolbar } = sideToolbarPlugin
-// const plugins = [sideToolbarPlugin]
-
-// const text = "Tell your story"
 
 class NewBlog extends React.Component {
   constructor(props) {
     super(props)
-    var decorator = new PrismDraftDecorator(Prism.languages.javascript)
     this.state = { editorState: EditorState.createEmpty(decorator) }
     this.focus = () => this.refs.description.focus()
     this.onChange = (editorState) => this.setState({editorState})
