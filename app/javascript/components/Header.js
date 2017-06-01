@@ -1,9 +1,4 @@
 import React from 'react'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
 import Appbar from 'muicss/lib/react/appbar'
 import '../styles/header.scss'
 

@@ -3,12 +3,36 @@ import 'whatwg-fetch'
 
 export const REQUEST_BLOGS = 'REQUEST_BLOGS'
 export const RECEIVE_BLOGS = 'RECEIVE_BLOGS'
+export const FETCH_BLOG = 'FETCH_BLOG'
+export const FETCH_BLOG_SUCCESS = 'FETCH_BLOG_SUCCESS'
 export const ADD_BLOG = 'ADD_BLOG'
 export const ADD_BLOG_SUCCESS = 'ADD_BLOG_SUCCESS'
 export const DELETE_BLOG = 'DELETE_BLOG'
 export const DELETE_BLOG_SUCCESS = 'DELETE_BLOG_SUCCESS'
 
+export function fetchBlog(id) {
+  return function (dispatch) {
+    const request = fetch(`/api/v1/blogs/${id}`, {
+      method: 'GET'
+    })
+      .then(response => response.json())
+      .then(blog => dispatch(getBlog(blog)))
+      .then(() => { dispatch(getBlogSuccess()) })
+  }
+}
 
+function getBlog(blog) {
+  return {
+    type: FETCH_BLOG,
+    blog: blog
+  }
+}
+
+function getBlogSuccess() {
+  return {
+    type: FETCH_BLOG_SUCCESS
+  }
+}
 export function addBlog(data) {
   return function (dispatch) {
     const request = fetch(`/api/v1/blogs`, {

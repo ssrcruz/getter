@@ -9,6 +9,7 @@ import AppComponent from '../components/App'
 import Contact from '../components/Contact'
 import About from '../components/About'
 import BlogForm from '../components/BlogForm'
+import getBlog from '../components/getBlog'
 import Home from '../components/Home'
 import WebpackerReact from 'webpacker-react'
 import injectTapEventPlugin from 'react-tap-event-plugin'
@@ -22,5 +23,6 @@ WebpackerReact.setup({
   Home,
   Contact,
   About,
-  BlogForm
+  BlogForm,
+  getBlog
 })

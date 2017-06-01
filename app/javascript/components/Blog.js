@@ -5,8 +5,14 @@ import { Editor,
          convertToRaw,
          convertFromRaw,
          ContentState } from 'draft-js'
+import { BrowserRouter as Router,
+         Route,
+         Link,
+         browserHistory
+       } from 'react-router-dom'
 import { deleteBlog } from '../actions/blogActions'
 import { connect } from 'react-redux'
+import BlogPage from './BlogPage'
 
 class Blog extends React.Component {
   handleClick(e) {
@@ -16,15 +22,25 @@ class Blog extends React.Component {
   }
 
   render() {
+    const activeClass = (path) => (location.pathname === path ? 'active' : '')
     return (
-      <div>
-        {this.props.title}
-        <Editor
-          readOnly={true}
-          editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.description)))}
-        />
-      <button onClick={this.handleClick.bind(this)}>Delete</button>
-      </div>
+      <Router history={browserHistory}>
+        <div>
+          <h1>
+            <a className={activeClass("/blogs/:id")}
+               href={`/blogs/${this.props.id}`}
+            >
+              {this.props.title}
+            </a>
+          </h1>
+          <Editor
+            readOnly={true}
+            editorState={EditorState.createWithContent(convertFromRaw(JSON.parse(this.props.description)))}
+          />
+          <button onClick={this.handleClick.bind(this)}>Delete</button>
+          <Route path="/blogs/:id"></Route>
+        </div>
+      </Router>
     )
   }
 }

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :blogs, only: [:index, :create, :update, :destroy] do
+      resources :blogs, only: [:index, :show, :create, :update, :destroy] do
       end
     end
   end

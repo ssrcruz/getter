@@ -1,5 +1,10 @@
 import React from 'react'
-import { Editor, EditorState, RichUtils, convertToRaw, convertFromRaw, getDefaultKeyBinding } from 'draft-js'
+import { Editor,
+         EditorState,
+         RichUtils,
+         convertToRaw,
+         convertFromRaw,
+         getDefaultKeyBinding } from 'draft-js'
 import Layout from '../layouts/application'
 import { addBlog } from '../actions/blogActions'
 import { connect } from 'react-redux'
@@ -7,14 +12,12 @@ import { styleMap,
          BlockStyleControls,
          InlineStyleControls,
          getBlockStyle } from './RichEditor'
-import { PrismDraftDecorator } from '../decorators/decorator'
-import Prism from 'prismjs'
 import '../styles/editorStyles.css'
 
 class NewBlog extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { editorState: EditorState.createEmpty(decorator) }
+    this.state = { editorState: EditorState.createEmpty() }
     this.focus = () => this.refs.description.focus()
     this.onChange = (editorState) => this.setState({editorState})
 

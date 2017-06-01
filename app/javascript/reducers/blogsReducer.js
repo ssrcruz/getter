@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
 import { RECEIVE_BLOGS,
          REQUEST_BLOGS,
+         FETCH_BLOG,
+         FETCH_BLOG_SUCCESS,
          ADD_BLOG,
          ADD_BLOG_SUCCESS,
          DELETE_BLOG,
@@ -27,6 +29,18 @@ export default function reducer(state = {
         fetching: false,
         fetched: true,
         blogs: action.blogs
+      }
+    case "FETCH_BLOG":
+      return {
+        ...state,
+        fetching: true,
+        blogs: [...state.blogs.filter(blog => blog.id === action.blog)]
+      }
+    case "FETCH_BLOG_SUCCESS":
+      return {
+        ...state,
+        fetching: false,
+        fetched: true
       }
     case "ADD_BLOG":
       return {
