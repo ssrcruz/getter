@@ -11,6 +11,7 @@ import About from '../components/About'
 import BlogForm from '../components/BlogForm'
 import getBlog from '../components/getBlog'
 import Home from '../components/Home'
+import SignUpForm from '../components/SignUpForm'
 import WebpackerReact from 'webpacker-react'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import Turbolinks from 'turbolinks'
@@ -24,5 +25,6 @@ WebpackerReact.setup({
   Contact,
   About,
   BlogForm,
-  getBlog
+  getBlog,
+  SignUpForm
 })

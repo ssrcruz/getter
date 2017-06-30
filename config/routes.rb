@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/contact', to: 'site#contact', as: 'contact'
   get '/newblog', to: 'site#new_blog', as: 'newblog'
   get '/blogs/:id', to: 'site#blog', as: 'blog'
+  get '/signup', to: 'site#signup', as: 'signup'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
