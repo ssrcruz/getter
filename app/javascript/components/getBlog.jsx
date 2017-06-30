@@ -1,5 +1,5 @@
 import React from 'react'
-import BlogPage from './BlogPage.jsx'
+import BlogPage from './BlogPage'
 import { Provider } from 'react-redux'
 import store from '../store/configureStore.js'
 
