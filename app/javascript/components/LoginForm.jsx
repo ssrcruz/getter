@@ -49,7 +49,7 @@ const LoginForm = ({
             <RaisedButton type="submit" label="Log in" primary />
           </div>
 
-          <CardText>Don't have an account?<a href="/login">Create one</a></CardText>
+          <CardText>Don't have an account? <a href="/login">Create one</a></CardText>
         </form>
       </Card>
     </div>
