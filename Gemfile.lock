@@ -138,11 +138,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (12.0.0)
-<<<<<<< HEAD
-    rb-fsevent (0.10.0)
-=======
     rb-fsevent (0.10.2)
->>>>>>> 47545cfdfc5fce58b375c9c41b0dfc39a5a280bc
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     responders (2.4.0)
