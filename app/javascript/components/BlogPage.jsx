@@ -1,5 +1,5 @@
 import React from 'react'
-import Blog from './Blog.js'
+import Blog from './Blog'
 import Layout from '../layouts/application.jsx'
 import { fetchBlog } from '../actions/blogActions'
 import { connect } from 'react-redux'

@@ -7,34 +7,26 @@ import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import '../styles/styles.scss'
 
-const SignUpForm = ({
+
+
+const LoginForm = ({
   onSubmit,
   onChange,
   errors,
-  user,
+  user
 }) => (
   <MuiThemeProvider>
     <div>
       <Layout/>
       <Card className="container">
         <form action="/" onSubmit={onSubmit}>
-          <h2 className="card-heading">Signup</h2>
+          <h2 className="card-heading">Login</h2>
 
-          {<p className="error-message">{errors.summary}</p> && errors.summary}
-
-          <div className="field-line">
-            <TextField
-              floatingLabelText="Name"
-              name="name"
-              errorText={errors.name}
-              onChange={onChange}
-              value={user.name}
-            />
-          </div>
+          {errors.summary && <p className="error-message">{errors.summary}</p>}
 
           <div className="field-line">
             <TextField
-              floatingLabelText="email"
+              floatingLabelText="Email"
               name="email"
               errorText={errors.email}
               onChange={onChange}
@@ -44,7 +36,7 @@ const SignUpForm = ({
 
           <div className="field-line">
             <TextField
-              floatingLabelText="password"
+              floatingLabelText="Password"
               type="password"
               name="password"
               onChange={onChange}
@@ -54,20 +46,21 @@ const SignUpForm = ({
           </div>
 
           <div className="button-line">
-            <RaisedButton type="submit" label="Create Account" primary />
+            <RaisedButton type="submit" label="Log in" primary />
           </div>
-
-          <CardText>Already have an account? <a href='/login'>Log in</a></CardText>
+        
+          <CardText>Don't have an account? <a href="/signup"> Signup </a></CardText>
         </form>
       </Card>
     </div>
   </MuiThemeProvider>
 )
 
-SignUpForm.propTypes = {
+LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired
 }
-export default SignUpForm
+
+export default LoginForm

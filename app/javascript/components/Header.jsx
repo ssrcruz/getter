@@ -12,6 +12,7 @@ const Header = () => (
         <li><a className={activeClass('/about')} href="/about">About</a></li>
         <li><a className={activeClass('/contact')} href="/contact">Contact</a></li>
         <li><a className={activeClass('/newblog')} href="/newblog">New Blog</a></li>
+        <li><a className={activeClass('/login')} href="/login">Login</a></li>
         <li><a className={activeClass('/signup')} href="/signup">Signup</a></li>
       </ul>
     </Appbar>

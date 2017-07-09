@@ -11,10 +11,13 @@ import About from '../components/About'
 import BlogForm from '../components/BlogForm'
 import getBlog from '../components/getBlog'
 import Home from '../components/Home'
+import SignUpPage from '../components/SignUpPage'
+import LoginPage from '../components/LoginPage'
 import WebpackerReact from 'webpacker-react'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import Turbolinks from 'turbolinks'
 
+// remove tap delay, essential for MaterialUI to work properly
 injectTapEventPlugin()
 
 Turbolinks.start()
@@ -24,5 +27,7 @@ WebpackerReact.setup({
   Contact,
   About,
   BlogForm,
-  getBlog
+  getBlog,
+  SignUpPage,
+  LoginPage
 })
